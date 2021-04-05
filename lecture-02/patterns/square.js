@@ -1,4 +1,4 @@
-let n = 10;
+let n = 5;
 
 let row = 0;
 while(row < n){
