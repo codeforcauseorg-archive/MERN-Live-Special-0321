@@ -1,0 +1,15 @@
+{
+  "name": "wapp",
+  "version": "1.0.0",
+  "description": "A sample APp",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
