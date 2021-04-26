@@ -107,7 +107,7 @@ function App() {
             margin: "20px",
           }}
         >
-          <h6>{oldExpression}</h6>
+          <h4>{oldExpression}</h4>
           <h1>{expression}</h1>
         </div>
 
