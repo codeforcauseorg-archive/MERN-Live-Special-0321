@@ -26,6 +26,8 @@ export default function SimpleList({setDrawerOpen}) {
 
     const history = useHistory();
 
+    console.log(history);
+
     return (
         <div className={classes.root}>
             <List component="nav" aria-label="main mailbox folders">
@@ -38,24 +40,30 @@ export default function SimpleList({setDrawerOpen}) {
                     </ListItemIcon>
                     <ListItemText primary="Inbox" />
                 </ListItem>
-                <ListItem button>
+                <ListItem button onClick={() => {
+                        history.push("/drafts");
+                        setDrawerOpen(false);
+                    }} >
                     <ListItemIcon>
                         <DraftsIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Drafts" onClick={() => {
-                        history.push("/drafts");
-                        setDrawerOpen(false);
-                    }} />
+                    <ListItemText primary="Drafts" />
                 </ListItem>
             </List>
             <Divider />
             <List component="nav" aria-label="secondary mailbox folders">
-                <ListItem button>
+                <ListItem button onClick={() => {
+                        history.push("/trash");
+                        setDrawerOpen(false);
+                    }}>
                     <ListItemText primary="Trash" />
                 </ListItem>
-                <ListItemLink href="#simple-list">
+                <ListItem button onClick={() => {
+                        history.push("/spam");
+                        setDrawerOpen(false);
+                    }}>
                     <ListItemText primary="Spam" />
-                </ListItemLink>
+                </ListItem>
             </List>
         </div>
     );

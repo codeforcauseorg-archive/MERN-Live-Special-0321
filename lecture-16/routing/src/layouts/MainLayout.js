@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 import DraftPage from "../pages/DraftsPage";
 import InboxPage from "../pages/InboxPage";
+import TrashPage from '../pages/TrashPage';
+import SpamPage from '../pages/SpamPage';
 
 const useStyles = makeStyles((theme) => ({
     menuButton: {
@@ -51,6 +53,12 @@ function MainLayout() {
                     </Route>
                     <Route path="/inbox" exact>
                         <InboxPage />
+                    </Route>
+                    <Route path="/spam" exact>
+                        <SpamPage />
+                    </Route>
+                    <Route path="/trash" exact>
+                        <TrashPage />
                     </Route>
                 </Switch>
 
