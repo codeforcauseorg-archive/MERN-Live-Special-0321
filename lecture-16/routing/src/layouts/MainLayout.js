@@ -1,28 +1,32 @@
-import { AppBar, Button, Drawer, IconButton, makeStyles, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
+import {
+  AppBar,
+  Button,
+  Drawer,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 import React, { useState } from "react";
 import SimpleList from "../components/SimpleList";
 
-
-import {
-     Route, Switch
-} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import DraftPage from "../pages/DraftsPage";
 import InboxPage from "../pages/InboxPage";
 import TrashPage from '../pages/TrashPage';
 import SpamPage from '../pages/SpamPage';
 
 const useStyles = makeStyles((theme) => ({
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-    },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
 }));
 
 function MainLayout() {
-
 
     const [drawerOpen, setDrawerOpen] = useState(false);
     const classes = useStyles();
