@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
   }
 });
 
-app.get("/api/alive", function (req, res) {
+app.get("/alive", function (req, res) {
   res.send("Noted you are alive" + " You are veried as " + req.user.user_id);
 });
 
