@@ -13,9 +13,12 @@ admin.initializeApp({
 let app = express();
 app.use(cors());
 
-app.use("/ye", express.static('public'))
 
 app.use(bearerToken());
+
+app.get("/", function (req, res) {
+  res.send("We are visible to everyone");
+});
 
 app.use(function (req, res, next) {
   if (req.token) {
