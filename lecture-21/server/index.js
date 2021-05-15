@@ -6,13 +6,14 @@ let admin = require("firebase-admin");
 var serviceAccount = require("./service.json");
 const { response } = require("express");
 
+let PORT = process.env.PORT || 5000;
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 
 let app = express();
 app.use(cors());
-
 
 app.use(bearerToken());
 
@@ -38,8 +39,8 @@ app.use(function (req, res, next) {
   }
 });
 
-app.get("/alive", function (req, res) {
+app.get("/api/alive", function (req, res) {
   res.send("Noted you are alive" + " You are veried as " + req.user.user_id);
 });
 
-app.listen(5000);
+app.listen(PORT);
