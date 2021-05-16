@@ -9,9 +9,16 @@ function Home() {
   let [target, setTarget] = useState("");
   let [message, setMessage] = useState("");
   let [messages, setMessages] = useState([]);
+  let [active, setActive] = useState([]);
 
-  useEffect(function () {
-    let sock = io("http://localhost:5000/");
+  useEffect(async function () {
+    let token = await user.getIdToken(true);
+    // console.log(token);
+    let sock = io("http://localhost:5000/", {
+      extraHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     sock.on("connect", function () {
       console.log("You are connected");
@@ -29,30 +36,59 @@ function Home() {
         return gen;
       });
     });
+
+    sock.on("active", function (payload) {
+      setActive(payload);
+    });
   }, []);
 
   return socket ? (
-    <div>
+    <div style={{
+      display: "flex",
+      flexDirection: "column",
+      margin: "10px",
+    }}>
       <h1>{user.uid}</h1>
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           margin: "10px",
+          justifyContent: "center"
         }}
       >
-        <input
-          style={{
-            flexGrow: 1,
-            height: "50px",
-            margin: "10px",
-          }}
-          value={target}
-          onChange={function (event) {
-            setTarget(event.target.value);
-            console.log(event.target.value);
-          }}
-        ></input>
+         <button
+              onClick={() => {
+                setTarget("");
+              }}
+              style={{
+                margin: "10px",
+              }}
+            >
+              All
+            </button>
+        {active.map(function (person) {
+           return (user.uid !== person.uid) ? (
+            <button
+              onClick={() => {
+                setTarget(person.uid);
+              }}
+              style={{
+                margin: "10px",
+              }}
+            >
+              {person.name}
+            </button>
+           ): undefined
+        })}
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          margin: "10px",
+        }}
+      >   
 
         <input
           style={{
@@ -73,12 +109,10 @@ function Home() {
           }}
           onClick={function () {
             socket.emit("message", {
-              senderID: user.uid,
-              senderName: user.displayName,
               message: message,
-              targetId: target
+              targetId: target,
             });
-
+            setTarget("");
             setMessage("");
           }}
         >
