@@ -11,6 +11,7 @@ let UserContext = React.createContext();
 function App() {
   let [user, setUser] = useState();
 
+
   useEffect(function () {
     firebase.auth().onAuthStateChanged((user) => {
       setUser(user);
@@ -25,7 +26,6 @@ function App() {
           .catch(function (error) {
             console.log(error);
           });
-      } else {
       }
     });
   }, []);

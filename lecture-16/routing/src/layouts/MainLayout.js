@@ -14,6 +14,8 @@ import SimpleList from "../components/SimpleList";
 import { Route, Switch } from "react-router-dom";
 import DraftPage from "../pages/DraftsPage";
 import InboxPage from "../pages/InboxPage";
+import TrashPage from '../pages/TrashPage';
+import SpamPage from '../pages/SpamPage';
 
 const useStyles = makeStyles((theme) => ({
   menuButton: {
@@ -25,44 +27,48 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MainLayout() {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const classes = useStyles();
 
-  return (
-    <React.Fragment>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            onClick={function () {
-              setDrawerOpen(!drawerOpen);
-            }}
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-      <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <SimpleList setDrawerOpen={setDrawerOpen} />
-      </Drawer>
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const classes = useStyles();
 
-      <Switch>
-        <Route path="/drafts" exact>
-          <DraftPage />
-        </Route>
-        <Route path="/inbox">
-          <InboxPage />
-        </Route>
-      </Switch>
-    </React.Fragment>
-  );
+    return (
+        <React.Fragment>
+
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton onClick={function () {
+                        setDrawerOpen(!drawerOpen);
+                    }} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography variant="h6" className={classes.title}>
+                        News
+    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+                <SimpleList setDrawerOpen={setDrawerOpen}/>
+            </Drawer>
+
+                <Switch>
+                    <Route path="/drafts" exact>
+                        <DraftPage />
+                    </Route>
+                    <Route path="/inbox" exact>
+                        <InboxPage />
+                    </Route>
+                    <Route path="/spam" exact>
+                        <SpamPage />
+                    </Route>
+                    <Route path="/trash" exact>
+                        <TrashPage />
+                    </Route>
+                </Switch>
+
+        </React.Fragment>
+
+    );
 }
 
 export { MainLayout };
