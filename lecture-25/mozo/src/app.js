@@ -4,6 +4,7 @@ const xss = require('xss-clean');
 const mongoSanitize = require('express-mongo-sanitize');
 const compression = require('compression');
 const cors = require('cors');
+let bearerToken = require('express-bearer-token');
 const passport = require('passport');
 const httpStatus = require('http-status');
 const config = require('./config/config');
@@ -20,6 +21,8 @@ if (config.env !== 'test') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
 }
+
+app.use(bearerToken());
 
 // set security HTTP headers
 app.use(helmet());
